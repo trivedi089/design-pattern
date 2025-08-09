@@ -1,4 +1,4 @@
-package main.StructuralPattern;
+package main.StructuralPattern.DecoratorPattern;
 
 // Base coffee
 class Coffee{

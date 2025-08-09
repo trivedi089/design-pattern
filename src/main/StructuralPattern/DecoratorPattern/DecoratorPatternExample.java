@@ -1,4 +1,4 @@
-package main.StructuralPattern;
+package main.StructuralPattern.DecoratorPattern;
 
 //component
 interface Coffeee{
