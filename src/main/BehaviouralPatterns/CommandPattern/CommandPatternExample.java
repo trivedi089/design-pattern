@@ -1,8 +1,8 @@
 package main.BehaviouralPatterns.CommandPattern;
 
-interface Command{
-    void execute();
-}
+//Working Principle : Invoker(Command) -> Command(Receiver) -> Receiver
+
+//Receiver
 class Light1{
 
     public void turnOn(){
@@ -12,6 +12,11 @@ class Light1{
     public void turnOff(){
         System.out.println("Light is turned off");
     }
+}
+
+//Command
+interface Command{
+    void execute();
 }
 
 class LightOnCommand implements Command{
@@ -40,28 +45,43 @@ class LightOffCommand implements Command{
         System.out.print("Light is turned off");
     }
 }
+
+//Invoker
 class RemoteControl{
 
-    private Command command;
+    private Command buttonCommand;
 
-    RemoteControl(Command command){
-        this.command=command;
+    public void setButtonCommand(Command command){
+        this.buttonCommand=command;
     }
 
     public void pressButton(){
-        command.execute();
+        buttonCommand.execute();
     }
 }
 
-public class CommandPatternExample {
+public class CommandPattern {
 
     public static void main(String[] args){
 
+        //Light
         Light1 livingRoomLight = new Light1();
+
+        //Turn On Command
         LightOnCommand lightOnCommand = new LightOnCommand(livingRoomLight);
 
-        RemoteControl remoteControl = new RemoteControl(lightOnCommand);
+        //Turn off Command
+        LightOffCommand lightOffCommand = new LightOffCommand(livingRoomLight);
 
+        //Remote
+        RemoteControl remoteControl = new RemoteControl();
+
+        //Turn on
+        remoteControl.setButtonCommand(lightOnCommand);
+        remoteControl.pressButton();
+
+        //Turn off
+        remoteControl.setButtonCommand(lightOffCommand);
         remoteControl.pressButton();
 
 
